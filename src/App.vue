@@ -4,7 +4,7 @@
 
     <ul>
       <li v-for="(element, index) in numeroRandomico" :key="index">
-        {{ numeroRandomico }}
+        {{ element }}
       </li>
     </ul>
 
@@ -22,21 +22,22 @@ export default {
   },
 data: function(){
   return {
-    numeroRandomico : '',
+    numeroRandomico : [],
   }
 },
 
   mounted() {
     console.log(axios);
 
-    axios.get('https://flynn.boolean.careers/exercises/api/random/int')
-
-  .then ((response) => {
-    const result = response.data;
-    console.log(result.response);
-    this.numeroRandomico = result.response;
-    });
-  } 
+  for (let i = 0; i < 10; i++){
+    axios.get('https://flynn.boolean.careers/exercises/api/random/mail')
+      .then ((response) => {
+        const result = response.data;
+        console.log(result.response);
+        this.numeroRandomico.push(result.response);
+      });
+    }
+  }
 }
 
 </script>
